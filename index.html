@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkBoard</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at center, #1f2235, #000000);
+            --tile-bg: rgba(255, 255, 255, 0.08);
+            --tile-hover: rgba(255, 255, 255, 0.15);
+            --text-color: #f0f0f0;
+            --accent-color: #4facfe;
+            --edit-color: #ffc107;
+            --group-header-color: #666;
+            --group-text-color: #f0f0f0;
+            --backup-color: #17a2b8; /* Info Blue */
+            --restore-color: #28a745; /* Success Green */
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            height: 100vh;
+            overflow-y: auto; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            height: auto; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0; 
+        }
+
+        /* --- Attractive Heading CSS --- */
+        .header-area {
+            display: flex;
+            justify-content: space-between; /* Use space-between to spread items */
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        h1 {
+            font-weight: 600; 
+            letter-spacing: 2px;
+            
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5); 
+            margin: 0;
+            flex-grow: 1; /* Allows title to take available space */
+            text-align: center;
+        }
+
+        /* --- Backup/Restore Button Styles --- */
+        #backupButton, #restoreButton {
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            font-size: 14px;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        #backupButton {
+            background: var(--backup-color);
+        }
+        #backupButton:hover {
+            background: #138496;
+            transform: translateY(-1px);
+        }
+        
+        /* The file input itself is hidden, but the label acts as the button */
+        #restoreButton { 
+            background: var(--restore-color); 
+            display: inline-block; /* Make the label act like a button */
+            padding: 8px 15px; 
+            margin: 0;
+        }
+        #restoreButton:hover {
+            background: #1e7e34;
+            transform: translateY(-1px);
+        }
+
+        /* Hide the actual file input */
+        #restoreInput {
+            display: none;
+        }
+
+        /* --- Grouping Styles --- */
+        .group-container {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .group-header {
+            color: var(--group-header-color);
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 5px 0 5px 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .group-title-area {
+            display: flex;
+            align-items: center;
+            font-size: 18px; 
+            font-weight: 600;
+            color: var(--group-text-color);
+            text-transform: none;
+        }
+
+        /* --- Group Action Buttons --- */
+        .group-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .group-action-btn {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .group-action-btn:hover:not(:disabled) {
+            background: #555;
+            transform: translateY(-1px);
+        }
+        .group-action-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .group-move-btn {
+            padding: 5px 7px;
+            font-size: 12px;
+            line-height: 1;
+        }
+        
+        /* Group Rename Input Styling */
+        .group-rename-input {
+            background: #2a2a2a;
+            border: 1px solid #4facfe;
+            color: white;
+            padding: 4px 8px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 4px;
+            outline: none;
+            margin-right: 10px;
+            width: 200px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 24px;
+            padding: 10px;
+        }
+        
+        /* --- Tile Styling --- */
+        .tile {
+            background: var(--tile-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .tile:hover {
+            background: var(--tile-hover);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .tile img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .tile span {
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            width: 90%;
+            opacity: 0.9;
+        }
+
+        /* --- Tile Action Buttons --- */
+        .tile-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .action-btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+        }
+        .tile:hover .action-btn { opacity: 1; }
+
+        .delete-btn { background: #ff5252; color: white; }
+        .delete-btn:hover { background: #ff1744; transform: scale(1.1); }
+        
+        .edit-btn { background: var(--edit-color); color: #1a1a1a; font-size: 12px;}
+        .edit-btn:hover { background: #ffc82a; transform: scale(1.1); }
+
+        .move-btn { 
+            background: #6c757d; 
+            color: white; 
+            font-size: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        .move-btn:hover:not(:disabled) { background: #5a6268; transform: scale(1.1); }
+        .move-btn:disabled { cursor: default; opacity: 0.2 !important; }
+
+        /* --- Add Button --- */
+        .add-tile {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            background: transparent;
+            cursor: pointer !important;
+        }
+        .add-tile span { font-size: 40px; font-weight: 300; opacity: 0.5; }
+        .add-tile:hover span { opacity: 1; }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 16px;
+            width: 320px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal h3 { margin-top: 0; color: white; }
+        
+        input, #modalGroupInput {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+        }
+        input:focus, #modalGroupInput:focus { border-color: var(--accent-color); }
+        
+        .buttons { display: flex; gap: 10px; }
+        
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-save { background: var(--accent-color); color: #000; }
+        .btn-save:hover { filter: brightness(1.1); }
+        .btn-cancel { background: #333; color: white; }
+        .btn-cancel:hover { background: #444; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-area">
+        <h1>LinkBoard</h1>
+        <div class="header-actions">
+            <button id="backupButton" title="Download Backup File!">💾</button>
+            
+            <input type="file" id="restoreInput" accept=".json">
+            <label for="restoreInput" id="restoreButton" title="Restore with Backup File!">🔄</label>
+        </div>
+    </div>
+    
+    <div id="mainContainer"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <h3 id="modalTitle">Add Shortcut</h3>
+        <input type="hidden" id="editIndex">
+        
+        <input 
+            type="text" 
+            id="modalGroupInput" 
+            placeholder="Group Name (e.g., Work or Social)"
+            list="groupOptions"
+        >
+        <datalist id="groupOptions"></datalist>
+        
+        <input type="text" id="nameInput" placeholder="Name (e.g. Google)">
+        <input type="text" id="urlInput" placeholder="URL (e.g. google.com)">
+        <input type="file" id="imgInput" accept="image/*" style="font-size: 12px;">
+        <div class="buttons">
+            <button class="btn-cancel" id="cancelButton">Cancel</button>
+            <button class="btn-save" id="saveButton">Save</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
