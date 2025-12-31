@@ -34,14 +34,44 @@
             align-items: flex-start; 
         }
 
+        .ad-sidebar {
+            width: 120px;
+            background: rgba(255, 255, 255, 0.05); /* Subtle dark background */
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            position: sticky;
+            flex-shrink: 0; /* Prevents sidebar from squishing */
+        }
+
+        .ad-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Vertical Text for the 50px bar */
+        .ad-placeholder {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: #666;
+            font-size: 12px;
+            letter-spacing: 5px;
+            opacity: 0.5;
+        }
+
+
+
         .container {
-            width: 90%;
-            max-width: 1200px;
+            margin-right: 10px;
+            width: 100%;
             height: auto; 
             min-height: 100vh; 
             display: flex;
             flex-direction: column;
-            padding: 20px 0; 
         }
 
         /* --- Attractive Heading CSS --- */
@@ -344,48 +374,116 @@
         .btn-cancel { background: #333; color: white; }
         .btn-cancel:hover { background: #444; }
 
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-left {
+            width: 70%;
+        }
+        .footer-right {
+            width: 30%;
+        }
+        .footer-right2 {
+            width: 15%;
+        }
+
+        .footer .title {
+            font-size: smaller;
+            margin-bottom: 4px;
+        }
+
+        .footer .text {
+            font-size: x-small;
+        }
+
+        .glow-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4facfe, transparent);
+            margin: 5px 0;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
+        <div class="container">
+            <div style="display: flex; ">
+                <aside class="ad-sidebar">
+                    <div class="ad-container">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+                        <ins class="adsbygoogle"
+                            style="display:inline-block;width:120px;height:600px"
+                            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                            data-ad-slot="1234567890"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </aside>
 
-<div class="container">
-    <div class="header-area">
-        <h1>LinkBoard</h1>
-        <div class="header-actions">
-            <button id="backupButton" title="Download Backup File!">💾</button>
+                <div style="width: 100%; margin: 15px;">
+                    <div class="header-area">
+                        <h1>LinkBoard</h1>
+                        <div class="header-actions">
+                            <button id="backupButton" title="Download Backup File!">💾</button>
+                            
+                            <input type="file" id="restoreInput" accept=".json">
+                            <label for="restoreInput" id="restoreButton" title="Restore with Backup File!">🔄</label>
+                        </div>
+                    </div>
+                    
+                    <div id="mainContainer"></div>
+                    <div class="glow-line"></div>
+                    <footer class="footer">
+                        <div class="footer-left">
+                            <p class="title">Privacy Policy</p>
+                            <p class="text">
+                            This site uses Google AdSense, which uses cookies to serve ads.
+                            Third-party vendors, including Google, use cookies to serve ads
+                            based on a user's prior visits to this website.
+                            </p>
+                        </div>
+
+                        <div class="footer-right">
+                            <p class="title">About This Tool</p>
+                            <p class="text">This tool helps user organise url in an effective manner.</p>
+                        </div>
+
+                        <div class="footer-right2">
+                            <p class="title">Contact</p>
+                            <p class="text">Email: sidharth.babu.work@gmail.com</p>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+           
+        </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h3 id="modalTitle">Add Shortcut</h3>
+            <input type="hidden" id="editIndex">
             
-            <input type="file" id="restoreInput" accept=".json">
-            <label for="restoreInput" id="restoreButton" title="Restore with Backup File!">🔄</label>
+            <input 
+                type="text" 
+                id="modalGroupInput" 
+                placeholder="Group Name (e.g., Work or Social)"
+                list="groupOptions"
+            >
+            <datalist id="groupOptions"></datalist>
+            
+            <input type="text" id="nameInput" placeholder="Name (e.g. Google)">
+            <input type="text" id="urlInput" placeholder="URL (e.g. google.com)">
+            <input type="file" id="imgInput" accept="image/*" style="font-size: 12px;">
+            <div class="buttons">
+                <button class="btn-cancel" id="cancelButton">Cancel</button>
+                <button class="btn-save" id="saveButton">Save</button>
+            </div>
         </div>
     </div>
-    
-    <div id="mainContainer"></div>
-</div>
 
-<div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-        <h3 id="modalTitle">Add Shortcut</h3>
-        <input type="hidden" id="editIndex">
-        
-        <input 
-            type="text" 
-            id="modalGroupInput" 
-            placeholder="Group Name (e.g., Work or Social)"
-            list="groupOptions"
-        >
-        <datalist id="groupOptions"></datalist>
-        
-        <input type="text" id="nameInput" placeholder="Name (e.g. Google)">
-        <input type="text" id="urlInput" placeholder="URL (e.g. google.com)">
-        <input type="file" id="imgInput" accept="image/*" style="font-size: 12px;">
-        <div class="buttons">
-            <button class="btn-cancel" id="cancelButton">Cancel</button>
-            <button class="btn-save" id="saveButton">Save</button>
-        </div>
-    </div>
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
