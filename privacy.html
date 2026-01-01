@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | LinkBoard</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at center, #1f2235, #000000);
+            --tile-bg: rgba(255, 255, 255, 0.08);
+            --text-color: #f0f0f0;
+            --accent-color: #4facfe;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            font-weight: 600; 
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5); 
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .policy-card {
+            background: var(--tile-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            line-height: 1.8;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-top: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        p, li {
+            color: rgba(240, 240, 240, 0.8);
+            font-size: 15px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            text-shadow: 0 0 8px var(--accent-color);
+            transform: translateX(-5px);
+        }
+
+        .glow-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4facfe, transparent);
+            margin: 40px 0;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <a href="index.html" class="back-link">← Back to Dashboard</a>
+        
+        <h1>Privacy Policy</h1>
+        
+        <div class="policy-card">
+            <p><strong>Effective Date: January 2024</strong></p>
+            
+            <p>Welcome to LinkBoard. Your privacy is critically important to us. Because this tool operates as a client-side utility, we have designed our data practices to be as transparent as possible.</p>
+
+            <h2>1. Local Data Sovereignty</h2>
+            <p>LinkBoard is a "Privacy-First" application. All data you enter—including URLs, group names, and custom images—is stored exclusively in your browser's <strong>Local Storage</strong>. We do not maintain any external servers to host your data. Your information never leaves your device unless you manually export a backup file.</p>
+
+            <h2>2. Google AdSense & Cookies</h2>
+            <p>We use Google AdSense to sustain the development of this tool. AdSense uses cookies to serve ads based on your visits to this and other websites on the internet. You should be aware of the following:</p>
+            <ul>
+                <li>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</li>
+                <li>Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
+                <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" style="color: var(--accent-color);">Ads Settings</a>.</li>
+            </ul>
+
+            <h2>3. Log Data</h2>
+            <p>Like most standard website servers, we may collect basic log information (such as IP addresses and browser types) for security and analytics purposes. This data is not linked to any personally identifiable information.</p>
+
+            <h2>4. Your Consent</h2>
+            <p>By using LinkBoard, you hereby consent to our Privacy Policy and agree to its terms. If you have any questions regarding your data, feel free to contact us.</p>
+            
+            <p style="margin-top: 30px; font-size: 13px; color: var(--accent-color);">Email: sidharth.babu.work@gmail.com</p>
+        </div>
+
+        <div class="glow-line"></div>
+    </div>
+</body>
+</html>

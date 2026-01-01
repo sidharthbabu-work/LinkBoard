@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About LinkBoard - Visual Bookmark Manager</title>
+    <style>
+        body { background: radial-gradient(circle at center, #1f2235, #000000); color: #f0f0f0; font-family: sans-serif; padding: 50px; line-height: 1.8; }
+        .content { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid #333; }
+        h1 { color: #4facfe; }
+        a { color: #4facfe; text-decoration: none; }
+        .glow-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4facfe, transparent);
+            margin: 40px 0;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <a href="index.html">← Back to Dashboard</a>
+        <h1>About LinkBoard</h1>
+        <p>LinkBoard was created to simplify the way we interact with the web. In an era of "tab overload," having a centralized, local, and visual home base is essential for focus.</p>
+        <h2>Technical Architecture</h2>
+        <p>This application is built using pure JavaScript, HTML5, and CSS3. It utilizes the browser's <code>localStorage</code> API for persistence and <code>Blob</code> objects for generating data backups. Because there is no backend database, the tool is incredibly fast and respects user privacy by design.</p>
+        <h2>Development Philosophy</h2>
+        <p>Our goal was to create a "zero-latency" tool. By avoiding heavy frameworks, LinkBoard loads instantly and works offline once the initial assets are cached.</p>
+    </div>
+    
+    <div class="glow-line"></div>
+</body>
+</html>
