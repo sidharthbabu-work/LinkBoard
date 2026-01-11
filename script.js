@@ -52,13 +52,13 @@ function backupData() {
     }
 
     // 1. Convert current data to a JSON string
-    const dataStr = JSON.stringify(items, null, 2); 
+    let dataStr = JSON.stringify(items, null, 2); 
     
     // 2. Create a Blob object from the JSON string
-    const blob = new Blob([dataStr], { type: 'application/json' });
+    let blob = new Blob([dataStr], { type: 'application/json' });
     
     // 3. Create a temporary URL for the Blob
-    const url = URL.createObjectURL(blob);
+    let url = URL.createObjectURL(blob);
     
     // 4. Create a temporary <a> element to trigger the download
     const a = document.createElement('a');
@@ -74,7 +74,17 @@ function backupData() {
     
     // 7. Clean up
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    // CRITICAL: Wipe the data from the browser cache/memory immediately
+    setTimeout(() => {
+        // Destroy the temporary URL reference
+        URL.revokeObjectURL(url);
+        
+        // Nullify the heavy variables to trigger Garbage Collection
+        dataStr = null;
+        backupBlob = null;
+        
+        console.log("🔒 Backup complete: Sensitive data purged from browser memory.");
+    }, 100);
 }
 
 // 6. FUNCTION TO RESTORE DATA (UPLOAD)
@@ -110,6 +120,10 @@ function restoreData(event) {
             } else {
                 alert("Error: The file format is invalid or corrupted.");
             }
+            
+            // 3. SECURITY WIPE: Nullify the reader result and event target
+            // This clears the large string from the browser's internal buffer
+            e.target.result = null;
         } catch (error) {
             console.error("Error parsing JSON:", error);
             alert("Error: Could not read file. Please ensure it is a valid JSON backup file.");

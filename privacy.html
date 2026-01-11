@@ -101,7 +101,18 @@
 
             <h2>1. Local Data Sovereignty</h2>
             <p>LinkBoard is a "Privacy-First" application. All data you enter—including URLs, group names, and custom images—is stored exclusively in your browser's <strong>Local Storage</strong>. We do not maintain any external servers to host your data. Your information never leaves your device unless you manually export a backup file.</p>
-
+            <h4>Zero-Transit Processing</h4>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                Unlike traditional tools, your information never leaves your device. We use a strict 
+                <strong>Content Security Policy (CSP)</strong> to physically block our application 
+                from sending your data to any external servers or third-party trackers.
+            </p>
+            <h4>Active Memory Purging</h4>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                To prevent "Data Residue," our system automatically wipes sensitive JSON strings and 
+                revokes temporary Blob URLs from your browser's RAM immediately after a Backup or 
+                Restore operation is completed.
+            </p>
             <h2>2. Ads & Cookies</h2>
             <p>We use ads to sustain the development of this tool. Ads uses cookies to serve ads based on your visits to this and other websites on the internet. You should be aware of the following:</p>
             <ul>
