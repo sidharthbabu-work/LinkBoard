@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>About | LinkBoard</title>
 
     <link rel="icon" type="image/png" href="favicon.png">
-    
+
     <style>
         :root {
             --bg-gradient: radial-gradient(circle at center, #1f2235, #000000);
@@ -31,12 +32,13 @@
         }
 
         h1 {
-            font-weight: 600; 
+            font-weight: 600;
             letter-spacing: 2px;
             background: linear-gradient(90deg, #4facfe, #00f2fe);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5); 
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
             margin-bottom: 30px;
             text-align: center;
         }
@@ -49,7 +51,7 @@
             border-radius: 16px;
             padding: 40px;
             line-height: 1.8;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
         }
 
         h2 {
@@ -60,7 +62,8 @@
             padding-bottom: 10px;
         }
 
-        p, li {
+        p,
+        li {
             color: rgba(240, 240, 240, 0.8);
             font-size: 15px;
         }
@@ -84,22 +87,50 @@
             background: linear-gradient(90deg, transparent, #4facfe, transparent);
             margin: 40px 0;
             opacity: 0.6;
-        }       
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .content-container {
+                width: 100%;
+                padding: 0 10px;
+                box-sizing: border-box;
+            }
+
+            .about-card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="content-container">
         <a href="index.html" class="back-link">← Back to Board</a>
         <h1>About LinkBoard</h1>
         <div class="about-card">
-            <p>LinkBoard was created to simplify the way we interact with the web. In an era of "tab overload," having a centralized, local, and visual home base is essential for focus.</p>
+            <p>LinkBoard was created to simplify the way we interact with the web. In an era of "tab overload," having a
+                centralized, local, and visual home base is essential for focus.</p>
             <h2>Technical Architecture</h2>
-            <p>This application is built using pure JavaScript, HTML5, and CSS3. It utilizes the browser's <code>localStorage</code> API for persistence and <code>Blob</code> objects for generating data backups. Because there is no backend database, the tool is incredibly fast and respects user privacy by design.</p>
+            <p>This application is built using pure JavaScript, HTML5, and CSS3. It utilizes the browser's
+                <code>localStorage</code> API for persistence and <code>Blob</code> objects for generating data backups.
+                Because there is no backend database, the tool is incredibly fast and respects user privacy by design.
+            </p>
             <h2>Development Philosophy</h2>
-            <p>Our goal was to create a "zero-latency" tool. By avoiding heavy frameworks, LinkBoard loads instantly and works offline once the initial assets are cached.</p>  
+            <p>Our goal was to create a "zero-latency" tool. By avoiding heavy frameworks, LinkBoard loads instantly and
+                works offline once the initial assets are cached.</p>
         </div>
     </div>
-    
+
     <div class="glow-line"></div>
 </body>
+
 </html>

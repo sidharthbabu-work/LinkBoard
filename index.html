@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self'; 
@@ -13,9 +14,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LinkBoard</title>
-    
+
     <link rel="icon" type="image/png" href="favicon.png">
-    
+
     <style>
         :root {
             --bg-gradient: radial-gradient(circle at center, #1f2235, #000000);
@@ -26,8 +27,10 @@
             --edit-color: #ffc107;
             --group-header-color: #666;
             --group-text-color: #f0f0f0;
-            --backup-color: #17a2b8; /* Info Blue */
-            --restore-color: #28a745; /* Success Green */
+            --backup-color: #17a2b8;
+            /* Info Blue */
+            --restore-color: #28a745;
+            /* Success Green */
         }
 
         body {
@@ -37,22 +40,24 @@
             padding: 0;
             color: var(--text-color);
             height: 100vh;
-            overflow-y: auto; 
+            overflow-y: auto;
             display: flex;
             justify-content: center;
-            align-items: flex-start; 
+            align-items: flex-start;
         }
 
         .ad-sidebar {
             width: 120px;
-            background: rgba(255, 255, 255, 0.05); /* Subtle dark background */
+            background: rgba(255, 255, 255, 0.05);
+            /* Subtle dark background */
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-top: 20px;
             position: sticky;
-            flex-shrink: 0; /* Prevents sidebar from squishing */
+            flex-shrink: 0;
+            /* Prevents sidebar from squishing */
         }
 
         .ad-container {
@@ -77,8 +82,8 @@
         .container {
             margin-right: 10px;
             width: 100%;
-            height: auto; 
-            min-height: 100vh; 
+            height: auto;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -86,12 +91,14 @@
         /* --- Attractive Heading CSS --- */
         .header-area {
             display: flex;
-            justify-content: space-between; /* Use space-between to spread items */
+            justify-content: space-between;
+            /* Use space-between to spread items */
             align-items: center;
             margin-bottom: 20px;
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
         }
-        
+
         .header-actions {
             display: flex;
             gap: 10px;
@@ -99,47 +106,53 @@
         }
 
         h1 {
-            font-weight: 600; 
+            font-weight: 600;
             letter-spacing: 2px;
-            
+
             background: linear-gradient(90deg, #4facfe, #00f2fe);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5); 
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
             margin: 0;
-            flex-grow: 1; /* Allows title to take available space */
+            flex-grow: 1;
+            /* Allows title to take available space */
             text-align: center;
         }
 
         /* --- Backup/Restore Button Styles --- */
-        #backupButton, #restoreButton {
+        #backupButton,
+        #restoreButton {
             border: none;
             padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             font-size: 14px;
             color: white;
             line-height: 1.2;
         }
-        
+
         #backupButton {
             background: var(--backup-color);
         }
+
         #backupButton:hover {
             background: #138496;
             transform: translateY(-1px);
         }
-        
+
         /* The file input itself is hidden, but the label acts as the button */
-        #restoreButton { 
-            background: var(--restore-color); 
-            display: inline-block; /* Make the label act like a button */
-            padding: 8px 15px; 
+        #restoreButton {
+            background: var(--restore-color);
+            display: inline-block;
+            /* Make the label act like a button */
+            padding: 8px 15px;
             margin: 0;
         }
+
         #restoreButton:hover {
             background: #1e7e34;
             transform: translateY(-1px);
@@ -170,11 +183,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .group-title-area {
             display: flex;
             align-items: center;
-            font-size: 18px; 
+            font-size: 18px;
             font-weight: 600;
             color: var(--group-text-color);
             text-transform: none;
@@ -196,10 +209,12 @@
             font-size: 14px;
             transition: background 0.2s, transform 0.2s;
         }
+
         .group-action-btn:hover:not(:disabled) {
             background: #555;
             transform: translateY(-1px);
         }
+
         .group-action-btn:disabled {
             opacity: 0.3;
             cursor: default;
@@ -210,7 +225,7 @@
             font-size: 12px;
             line-height: 1;
         }
-        
+
         /* Group Rename Input Styling */
         .group-rename-input {
             background: #2a2a2a;
@@ -231,7 +246,7 @@
             gap: 24px;
             padding: 10px;
         }
-        
+
         /* --- Tile Styling --- */
         .tile {
             background: var(--tile-bg);
@@ -253,7 +268,7 @@
         .tile:hover {
             background: var(--tile-hover);
             transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
             border-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -263,7 +278,7 @@
             border-radius: 10px;
             object-fit: cover;
             margin-bottom: 12px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
         }
 
         .tile span {
@@ -282,7 +297,7 @@
             display: flex;
             gap: 5px;
         }
-        
+
         .action-btn {
             width: 20px;
             height: 20px;
@@ -298,23 +313,49 @@
             transition: opacity 0.2s ease;
             z-index: 10;
         }
-        .tile:hover .action-btn { opacity: 1; }
 
-        .delete-btn { background: #ff5252; color: white; }
-        .delete-btn:hover { background: #ff1744; transform: scale(1.1); }
-        
-        .edit-btn { background: var(--edit-color); color: #1a1a1a; font-size: 12px;}
-        .edit-btn:hover { background: #ffc82a; transform: scale(1.1); }
+        .tile:hover .action-btn {
+            opacity: 1;
+        }
 
-        .move-btn { 
-            background: #6c757d; 
-            color: white; 
+        .delete-btn {
+            background: #ff5252;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #ff1744;
+            transform: scale(1.1);
+        }
+
+        .edit-btn {
+            background: var(--edit-color);
+            color: #1a1a1a;
+            font-size: 12px;
+        }
+
+        .edit-btn:hover {
+            background: #ffc82a;
+            transform: scale(1.1);
+        }
+
+        .move-btn {
+            background: #6c757d;
+            color: white;
             font-size: 10px;
             width: 20px;
             height: 20px;
         }
-        .move-btn:hover:not(:disabled) { background: #5a6268; transform: scale(1.1); }
-        .move-btn:disabled { cursor: default; opacity: 0.2 !important; }
+
+        .move-btn:hover:not(:disabled) {
+            background: #5a6268;
+            transform: scale(1.1);
+        }
+
+        .move-btn:disabled {
+            cursor: default;
+            opacity: 0.2 !important;
+        }
 
         /* --- Add Button --- */
         .add-tile {
@@ -322,39 +363,61 @@
             background: transparent;
             cursor: pointer !important;
         }
-        .add-tile span { font-size: 40px; font-weight: 300; opacity: 0.5; }
-        .add-tile:hover span { opacity: 1; }
+
+        .add-tile span {
+            font-size: 40px;
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .add-tile:hover span {
+            opacity: 1;
+        }
 
         /* --- Modal --- */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(4px);
             z-index: 100;
             justify-content: center;
             align-items: center;
         }
-        
+
         .modal {
             background: #1a1a1a;
             padding: 30px;
             border-radius: 16px;
             width: 320px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
-        .modal h3 { margin-top: 0; color: white; }
-        
-        input, #modalGroupInput {
+        .modal h3 {
+            margin-top: 0;
+            color: white;
+        }
+
+        input,
+        #modalGroupInput {
             width: 100%;
             padding: 12px;
             margin: 8px 0 16px;
@@ -365,10 +428,17 @@
             box-sizing: border-box;
             outline: none;
         }
-        input:focus, #modalGroupInput:focus { border-color: var(--accent-color); }
-        
-        .buttons { display: flex; gap: 10px; }
-        
+
+        input:focus,
+        #modalGroupInput:focus {
+            border-color: var(--accent-color);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
         button {
             flex: 1;
             padding: 12px;
@@ -378,10 +448,24 @@
             font-weight: 600;
             transition: 0.2s;
         }
-        .btn-save { background: var(--accent-color); color: #000; }
-        .btn-save:hover { filter: brightness(1.1); }
-        .btn-cancel { background: #333; color: white; }
-        .btn-cancel:hover { background: #444; }
+
+        .btn-save {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        .btn-save:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn-cancel {
+            background: #333;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background: #444;
+        }
 
         .footer {
             display: flex;
@@ -392,9 +476,11 @@
         .footer-left {
             width: 70%;
         }
+
         .footer-right {
             width: 30%;
         }
+
         .footer-right2 {
             width: 15%;
         }
@@ -414,95 +500,205 @@
             margin: 5px 0;
             opacity: 0.6;
         }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                overflow-y: auto;
+            }
+
+            .ad-sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                flex-direction: row;
+                padding: 10px;
+                position: static;
+                order: 2;
+                /* Move to bottom if desired, or keep at top. Let's keep at top for now as per structure but maybe order helps if flex context allows, but body is flex-col so order works */
+                /* Actually, usually ads are better at bottom on mobile or strict top. Let's put it at the bottom for better UX */
+                order: 10;
+                justify-content: center;
+            }
+
+            .ad-container {
+                height: auto;
+                width: 100%;
+            }
+
+            .ad-placeholder {
+                writing-mode: horizontal-tb;
+                letter-spacing: 2px;
+                margin-top: 5px;
+            }
+
+            .container {
+                margin-right: 0;
+                width: 100%;
+                min-height: auto;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .header-area {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .header-actions {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .group-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .group-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .group-rename-input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                /* Smaller tiles on mobile */
+                gap: 15px;
+            }
+
+            .tile {
+                height: 110px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-left,
+            .footer-right,
+            .footer-right2 {
+                width: 100%;
+                text-align: center;
+            }
+
+            .modal {
+                width: 90%;
+                max-width: 320px;
+            }
+        }
     </style>
-    <meta name="description" content="LinkBoard: A private, visual bookmark manager and productivity dashboard. Organize your links into groups, backup your data, and navigate the web faster.">
-   
-    
+    <meta name="description"
+        content="LinkBoard: A private, visual bookmark manager and productivity dashboard. Organize your links into groups, backup your data, and navigate the web faster.">
+
+
 </head>
 <div style="visibility: hidden; height: 0px; width: 0px;">
-    <iframe 
-        src="ads.html" 
-        sandbox="allow-scripts allow-same-origin" 
-        style="border:none; width:100%; height:250px;"
+    <iframe src="ads.html" sandbox="allow-scripts allow-same-origin" style="border:none; width:100%; height:250px;"
         title="Advertisement">
     </iframe>
 </div>
+
 <body>
-        <div class="container">
-            <div style="display: flex; min-height: 100%;">
-                <div style="width: 100%; margin: 15px;">
-                    <div class="header-area">
-                        <h1>LinkBoard</h1>
-                        <div class="header-actions">
-                            <button id="backupButton" title="Download Backup File!">💾</button>
-                            
-                            <input type="file" id="restoreInput" accept=".json">
-                            <label for="restoreInput" id="restoreButton" title="Restore with Backup File!">🔄</label>
-                        </div>
+    <div class="container">
+        <div style="display: flex; min-height: 100%;">
+            <div style="width: 100%; margin: 15px;">
+                <div class="header-area">
+                    <h1>LinkBoard</h1>
+                    <div class="header-actions">
+                        <button id="backupButton" title="Download Backup File!">💾</button>
+
+                        <input type="file" id="restoreInput" accept=".json">
+                        <label for="restoreInput" id="restoreButton" title="Restore with Backup File!">🔄</label>
                     </div>
-                    
-                    <div id="mainContainer"></div>
-                    <section style="max-width: 900px; margin: 40px auto; padding: 20px; line-height: 1.6; color: #ccc; background: rgba(255,255,255,0.03); border-radius: 12px;">
-                        <h2 style="color: var(--accent-color); border-bottom: 1px solid #444; pb-2;">Mastering Your Digital Workspace with LinkBoard</h2>
-                        <p>
-                            <strong>LinkBoard</strong> is a professional-grade bookmark management utility designed to streamline your web navigation. Unlike traditional browser bookmarks that get buried in menus, LinkBoard provides a visual, group-based dashboard that allows for instant access to your most critical resources.
-                        </p>
-
-                        <h3 style="color: #00f2fe; margin-top: 20px;">Why Use Visual Grouping?</h3>
-                        <p>
-                            Research shows that visual spatial recognition is faster than reading text lists. By assigning custom icons and grouping links into logical categories like "Work," "Social," or "Research," users can reduce cognitive load and improve daily productivity. Our board uses 128px high-definition favicons to ensure every link is instantly recognizable.
-                        </p>
-
-                        <h3 style="color: #00f2fe; margin-top: 20px;">Privacy & Data Sovereignty</h3>
-                        <p>
-                            One of the core pillars of LinkBoard is data privacy. This tool operates entirely on <strong>Local Storage</strong>. This means your URLs, group names, and layout configurations are never transmitted to a cloud server. You have total control over your data through our <em>Backup and Restore</em> system, which allows you to export your entire configuration as a JSON file for local safekeeping.
-                        </p>
-
-                        <h3 style="color: #00f2fe; margin-top: 20px;">Pro Tips for LinkBoard Users</h3>
-                        <ul style="padding-left: 20px; list-style-type: square;">
-                            <li><strong>Tile Position:</strong> Use the move buttons to prioritize your most-used links to the top-left of each group.</li>
-                            <li><strong>Timestamped Backups:</strong> We recommend creating a backup once a week to ensure you never lose your organized workspace.</li>
-                            <li><strong>Cross-Browser Portability:</strong> Since LinkBoard is a static utility, you can take your JSON backup and restore it on any device running a modern browser.</li>
-                        </ul>
-                    </section>
-                    <div class="glow-line"></div>
-                    <footer class="footer">
-                        <div class="footer-left">
-                            <p class="title">Privacy & Terms</p>
-                            <p class="text">
-                                Learn how we protect your data in our <a href="privacy.html" style="color:var(--accent-color);">Privacy Policy</a>.
-                                All processing is done locally in your browser.
-                            </p>
-                        </div>
-
-                        <div class="footer-right">
-                            <p class="title">Documentation</p>
-                            <p class="text">Discover the technology behind this tool on our <a href="about.html" style="color:var(--accent-color);">About Page</a>.</p>
-                        </div>
-
-                        <div class="footer-right2">
-                            <p class="title">Contact</p>
-                            <p class="text">Support: sidharth.babu.work@gmail.com</p>
-                        </div>
-                    </footer>
                 </div>
+
+                <div id="mainContainer"></div>
+                <section
+                    style="max-width: 900px; margin: 40px auto; padding: 20px; line-height: 1.6; color: #ccc; background: rgba(255,255,255,0.03); border-radius: 12px;">
+                    <h2 style="color: var(--accent-color); border-bottom: 1px solid #444; pb-2;">Mastering Your Digital
+                        Workspace with LinkBoard</h2>
+                    <p>
+                        <strong>LinkBoard</strong> is a professional-grade bookmark management utility designed to
+                        streamline your web navigation. Unlike traditional browser bookmarks that get buried in menus,
+                        LinkBoard provides a visual, group-based dashboard that allows for instant access to your most
+                        critical resources.
+                    </p>
+
+                    <h3 style="color: #00f2fe; margin-top: 20px;">Why Use Visual Grouping?</h3>
+                    <p>
+                        Research shows that visual spatial recognition is faster than reading text lists. By assigning
+                        custom icons and grouping links into logical categories like "Work," "Social," or "Research,"
+                        users can reduce cognitive load and improve daily productivity. Our board uses 128px
+                        high-definition favicons to ensure every link is instantly recognizable.
+                    </p>
+
+                    <h3 style="color: #00f2fe; margin-top: 20px;">Privacy & Data Sovereignty</h3>
+                    <p>
+                        One of the core pillars of LinkBoard is data privacy. This tool operates entirely on
+                        <strong>Local Storage</strong>. This means your URLs, group names, and layout configurations are
+                        never transmitted to a cloud server. You have total control over your data through our
+                        <em>Backup and Restore</em> system, which allows you to export your entire configuration as a
+                        JSON file for local safekeeping.
+                    </p>
+
+                    <h3 style="color: #00f2fe; margin-top: 20px;">Pro Tips for LinkBoard Users</h3>
+                    <ul style="padding-left: 20px; list-style-type: square;">
+                        <li><strong>Tile Position:</strong> Use the move buttons to prioritize your most-used links to
+                            the top-left of each group.</li>
+                        <li><strong>Timestamped Backups:</strong> We recommend creating a backup once a week to ensure
+                            you never lose your organized workspace.</li>
+                        <li><strong>Cross-Browser Portability:</strong> Since LinkBoard is a static utility, you can
+                            take your JSON backup and restore it on any device running a modern browser.</li>
+                    </ul>
+                </section>
+                <div class="glow-line"></div>
+                <footer class="footer">
+                    <div class="footer-left">
+                        <p class="title">Privacy & Terms</p>
+                        <p class="text">
+                            Learn how we protect your data in our <a href="privacy.html"
+                                style="color:var(--accent-color);">Privacy Policy</a>.
+                            All processing is done locally in your browser.
+                        </p>
+                    </div>
+
+                    <div class="footer-right">
+                        <p class="title">Documentation</p>
+                        <p class="text">Discover the technology behind this tool on our <a href="about.html"
+                                style="color:var(--accent-color);">About Page</a>.</p>
+                    </div>
+
+                    <div class="footer-right2">
+                        <p class="title">Contact</p>
+                        <p class="text">Support: sidharth.babu.work@gmail.com</p>
+                    </div>
+                </footer>
             </div>
-           
         </div>
+
+    </div>
 
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <h3 id="modalTitle">Add Shortcut</h3>
             <input type="hidden" id="editIndex">
-            
-            <input 
-                type="text" 
-                id="modalGroupInput" 
-                placeholder="Group Name (e.g., Work or Social)"
-                list="groupOptions"
-            >
+
+            <input type="text" id="modalGroupInput" placeholder="Group Name (e.g., Work or Social)" list="groupOptions">
             <datalist id="groupOptions"></datalist>
-            
+
             <input type="text" id="nameInput" placeholder="Name (e.g. Google)">
             <input type="text" id="urlInput" placeholder="URL (e.g. google.com)">
             <input type="file" id="imgInput" accept="image/*" style="font-size: 12px;">
@@ -515,4 +711,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
