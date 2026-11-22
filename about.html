@@ -89,6 +89,26 @@
             opacity: 0.6;
         }
 
+        .donation-section {
+            text-align: center;
+        }
+
+        .donation-qr {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto 12px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 12px;
+        }
+
+        .donation-link {
+            color: var(--accent-color);
+            overflow-wrap: anywhere;
+        }
+
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
             body {
@@ -127,6 +147,19 @@
             <h2>Development Philosophy</h2>
             <p>Our goal was to create a "zero-latency" tool. By avoiding heavy frameworks, LinkBoard loads instantly and
                 works offline once the initial assets are cached.</p>
+            <section class="donation-section" aria-labelledby="donate-heading">
+                <h2 id="donate-heading">Support the Cause</h2>
+                <p>If LinkBoard has been useful to you, you can optionally support its continued development by
+                    donating any amount through UPI.</p>
+                <a href="upi://pay?pa=sidharthbabu-astra%40ybl&amp;pn=Sidharth%20Babu&amp;cu=INR&amp;tn=Donate%20to%20LinkBoard"
+                    aria-label="Donate to LinkBoard using UPI">
+                    <img class="donation-qr" src="donate-qr.png" alt="UPI payment QR code for Sidharth Babu">
+                </a>
+                <p>Scan with any UPI app or <a class="donation-link"
+                        href="upi://pay?pa=sidharthbabu-astra%40ybl&amp;pn=Sidharth%20Babu&amp;cu=INR&amp;tn=Donate%20to%20LinkBoard">open
+                        the UPI payment link</a>.</p>
+                <p>UPI ID: <strong>sidharthbabu-astra@ybl</strong></p>
+            </section>
         </div>
     </div>
 

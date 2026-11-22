@@ -46,39 +46,6 @@
             align-items: flex-start;
         }
 
-        .ad-sidebar {
-            width: 120px;
-            background: rgba(255, 255, 255, 0.05);
-            /* Subtle dark background */
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-            position: sticky;
-            flex-shrink: 0;
-            /* Prevents sidebar from squishing */
-        }
-
-        .ad-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Vertical Text for the 50px bar */
-        .ad-placeholder {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            color: #666;
-            font-size: 12px;
-            letter-spacing: 5px;
-            opacity: 0.5;
-        }
-
-
-
         .container {
             margin-right: 10px;
             width: 100%;
@@ -509,32 +476,6 @@
                 overflow-y: auto;
             }
 
-            .ad-sidebar {
-                width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                flex-direction: row;
-                padding: 10px;
-                position: static;
-                order: 2;
-                /* Move to bottom if desired, or keep at top. Let's keep at top for now as per structure but maybe order helps if flex context allows, but body is flex-col so order works */
-                /* Actually, usually ads are better at bottom on mobile or strict top. Let's put it at the bottom for better UX */
-                order: 10;
-                justify-content: center;
-            }
-
-            .ad-container {
-                height: auto;
-                width: 100%;
-            }
-
-            .ad-placeholder {
-                writing-mode: horizontal-tb;
-                letter-spacing: 2px;
-                margin-top: 5px;
-            }
-
             .container {
                 margin-right: 0;
                 width: 100%;
@@ -605,11 +546,6 @@
 
 
 </head>
-<div style="visibility: hidden; height: 0px; width: 0px;">
-    <iframe src="ads.html" sandbox="allow-scripts allow-same-origin" style="border:none; width:100%; height:250px;"
-        title="Advertisement">
-    </iframe>
-</div>
 
 <body>
     <div class="container">
